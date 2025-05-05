@@ -331,22 +331,22 @@ echo "______________________________________________________________________"
 cd $HOME/Downloads
 echo "         compose yml and env file           "
 echo "--------------------------------------------"
-wget -O $HOME/docker/.env https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/.env
-wget -O $HOME/docker/docker-compose.yml https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/docker-compose.yml
+wget -O $HOME/docker/.env https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/.env
+wget -O $HOME/docker/docker-compose.yml https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/docker-compose.yml
 
 echo "      BTRBK config and mail script          "
 echo "--------------------------------------------"
 mkdir -p $HOME/docker/HOST/btrbk
-wget -O $HOME/docker/HOST/btrbk/btrbk.conf https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/HOST/btrbk/btrbk.conf
-wget -O $HOME/docker/HOST/btrbk/btrbk-mail.sh https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/HOST/btrbk/btrbk-mail.sh
+wget -O $HOME/docker/HOST/btrbk/btrbk.conf https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/HOST/btrbk/btrbk.conf
+wget -O $HOME/docker/HOST/btrbk/btrbk-mail.sh https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/HOST/btrbk/btrbk-mail.sh
 sudo ln -s $HOME/docker/HOST/btrbk/btrbk.conf /etc/btrbk/btrbk.conf
 # MANUALLY configure the $HOME/docker/HOST/btrbk/btrbk.conf to your needs
 
 echo "                 archiver                   "
 echo "--------------------------------------------"
 mkdir -p $HOME/docker/HOST/archiver
-wget -O $HOME/docker/HOST/archiver/archiver.sh https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/HOST/archiver/archiver.sh
-wget -O $HOME/docker/HOST/archiver/archiver_exclude.txt https://github.com/zilexa/Homeserver/blob/master/docker/HOST/archiver/archiver_exclude.txt
+wget -O $HOME/docker/HOST/archiver/archiver.sh https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/HOST/archiver/archiver.sh
+wget -O $HOME/docker/HOST/archiver/archiver_exclude.txt https://github.com/gambleben/Homeserver/blob/master/docker/HOST/archiver/archiver_exclude.txt
 
 
 echo "______________________________________________________"
@@ -359,7 +359,7 @@ case ${answer:0:1} in
     y|Y )
         sudo mkdir -p $HOME/docker/qbittorrent/config
         sudo chown ${USER}:${USER} $HOME/docker/qbittorrent/config
-        wget -O $HOME/docker/qbittorrent/config/qBittorrent.conf https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/qbittorrent/config/qBittorrent.conf
+        wget -O $HOME/docker/qbittorrent/config/qBittorrent.conf https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/qbittorrent/config/qBittorrent.conf
         sudo chmod 644 $HOME/docker/qbittorrent/config/qBittorrent.conf
     ;;
     * )
@@ -376,7 +376,7 @@ case ${answer:0:1} in
         echo " PIA VPN script to auto-update Qbittorrent  "
         echo "--------------------------------------------"
         mkdir -p $HOME/docker/vpn-proxy/pia-shared
-        wget -O $HOME/docker/vpn-proxy/pia-shared/updateport-qb.sh https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/vpn-proxy/pia-shared/updateport-qb.sh
+        wget -O $HOME/docker/vpn-proxy/pia-shared/updateport-qb.sh https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/vpn-proxy/pia-shared/updateport-qb.sh
         chmod +x $HOME/docker/vpn-proxy/pia-shared/updateport-qb.sh
         echo "DONE! Don't forget to enter your QBittorrent credentials in the script after you have changed them in the webUI"
         echo "(default is admin/adminadmin)."
@@ -402,9 +402,9 @@ case ${answer:0:1} in
         # Install snapper, required for snapraid-btrfs 
         sudo pamac install --no-confirm snapper-gui
         # Get snapper default template
-        sudo wget -O /etc/snapper/config-templates/default https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/HOST/snapraid/snapper/default
+        sudo wget -O /etc/snapper/config-templates/default https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/HOST/snapraid/snapper/default
         # get SnapRAID config
-        sudo wget -O $HOME/docker/HOST/snapraid/snapraid.conf https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/HOST/snapraid/snapraid.conf
+        sudo wget -O $HOME/docker/HOST/snapraid/snapraid.conf https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/HOST/snapraid/snapraid.conf
         sudo ln -s $HOME/docker/HOST/snapraid/snapraid.conf /etc/snapraid.conf
         # DONE !
         # MANUALLY: Create a root subvolume on your fastest drives named .snapraid, this wil contain snapraid content file. 
