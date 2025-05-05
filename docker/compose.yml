@@ -1,5 +1,5 @@
 ## UPDATED: 2024-02-11
-# changelog: https://github.com/zilexa/Homeserver/blob/master/docker/changelog.txt
+# changelog: https://github.com/gambleben/Homeserver/blob/master/docker/changelog.txt
 ##
 ## COMMON COMMANDS:
 # Check for typos: docker-compose config 

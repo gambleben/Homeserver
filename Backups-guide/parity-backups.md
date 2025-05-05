@@ -9,7 +9,7 @@ With SnapRAID-BTRFS-Runner, you will get email notifications of the SnapRAID syn
 
 ### Step 1: Create snapper config files
 - Create a backup of the default template: `sudo mv /etc/snapper/config-templates/default /etc/snapper/config-templates/defaultbak`
-- Get a template specific for Snapraid, disabling all other Snapper features: `sudo wget -O /etc/snapper/config-templates/default https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/HOST/snapraid/snapper/default`
+- Get a template specific for Snapraid, disabling all other Snapper features: `sudo wget -O /etc/snapper/config-templates/default https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/HOST/snapraid/snapper/default`
 - Now create snapper config files for the root filesystem: 
 `sudo snapper create-config /`
 - Create a snapper config for 1 subvolume per drive you want to protect with snapraid:  
@@ -37,6 +37,6 @@ Note: compared to the default snapraid-btrfs-runner, I have replaced the `mail` 
 
 
 ### Step 6: Schedule SnapRAID to run Nightly
-See the [Maintenance Guide](https://github.com/zilexa/Homeserver/blob/master/Maintenance-guide). SnapRAID is run once a day via the [Nightly](https://github.com/zilexa/Homeserver/blob/master/docker/HOST/nightly.sh) script. But you can choose to run it more often, by adding it directly to cron.
+See the [Maintenance Guide](https://github.com/gambleben/Homeserver/blob/master/Maintenance-guide). SnapRAID is run once a day via the [Nightly](https://github.com/gambleben/Homeserver/blob/master/docker/HOST/nightly.sh) script. But you can choose to run it more often, by adding it directly to cron.
 
-Note the snapshots created specifically for SnapRAID are seperate from the snapshots created by btrbk [(see Backups-guide)](https://github.com/zilexa/Homeserver/tree/master/Backups-guide), which maintains a timeline (X days, X weeks, X months) and copies snapshots to backup drives. 
+Note the snapshots created specifically for SnapRAID are seperate from the snapshots created by btrbk [(see Backups-guide)](https://github.com/gambleben/Homeserver/tree/master/Backups-guide), which maintains a timeline (X days, X weeks, X months) and copies snapshots to backup drives. 

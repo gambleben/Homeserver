@@ -6,7 +6,7 @@
 #sudo touch $HOME/docker/traefik/acme.json
 #sudo chmod 600 $HOME/docker/traefik/acme.json
 # Download Traefik settings
-#sudo wget -P $HOME/docker/traefik https://raw.githubusercontent.com/zilexa/Mediaserver/master/traefik/traefik.toml
+#sudo wget -P $HOME/docker/traefik https://raw.githubusercontent.com/gambleben/Mediaserver/master/traefik/traefik.toml
 
 
 ##____________________ Prometheus [Monitoring/Logging]

@@ -1,9 +1,9 @@
-To learn about Linux system folderstructure, standard subvolumes and tips for your folderstructure have a look at [Folderstructure Recommendations](https://github.com/zilexa/Homeserver/blob/master/filesystem/folderstructure-recommendations.md), which is independent of the filesystem options described below. 
+To learn about Linux system folderstructure, standard subvolumes and tips for your folderstructure have a look at [Folderstructure Recommendations](https://github.com/gambleben/Homeserver/blob/master/filesystem/folderstructure-recommendations.md), which is independent of the filesystem options described below. 
 
 ## Filesystems Options
 Technologies used: 
 - [BtrFS](https://linuxhint.com/btrfs-filesystem-beginner-guide/), an advanced filesystem. 
-- [MergerFS](https://github.com/trapexit/mergerfs#description) Allows to add a fast cache to your drive pool. Explaination here: [Tiered Caching](https://github.com/trapexit/mergerfs#tiered-caching). This way, [you can choose to use](https://github.com/zilexa/Homeserver/blob/master/Hardware%20recommendations.md) small 2.5" disk drives with very low power consumption and don't worry about speed (disk speed is not very important in a homeserver anyway).  
+- [MergerFS](https://github.com/trapexit/mergerfs#description) Allows to add a fast cache to your drive pool. Explaination here: [Tiered Caching](https://github.com/trapexit/mergerfs#tiered-caching). This way, [you can choose to use](https://github.com/gambleben/Homeserver/blob/master/Hardware%20recommendations.md) small 2.5" disk drives with very low power consumption and don't worry about speed (disk speed is not very important in a homeserver anyway).  
 - [SnapRAID](http://www.snapraid.it/faq#whatisit) via [Snapraid-btrfs](https://github.com/automorphism88/snapraid-btrfs#faq), reap the benefits for home use of SnapRAID-btrfs over BTRFS-RAID.
 - [btrbk](https://github.com/digint/btrbk), the default tool (for BtrFS) for a wide variety of backup purposes.
 - [nocache](https://github.com/Feh/nocache#nocache---minimize-filesystem-caching-effects)-rsync, to free up cache by moving data to the disks within the merged pool.
@@ -25,7 +25,7 @@ Technologies used:
 - Easiest solution! 
 - If your data does not fill much more than half of a single drive and the data does not grow fast, there is no need for RAID or data pooling. 
 - Also no need for RAID or MergerFS pooling if you can clearly seperate data per drive and the data will never exceed the size of the drive, for example: media downloads on drive 0, personal files of users A and B on drive 1 and personal files of users C and D on drive 2. 
-- In addition to the single data drive, you would want at least 1 backup drives inside your system. Also see [Step 7. Configure & Run Backups](https://github.com/zilexa/Homeserver#step-7---configure--run-backups). 
+- In addition to the single data drive, you would want at least 1 backup drives inside your system. Also see [Step 7. Configure & Run Backups](https://github.com/gambleben/Homeserver#step-7---configure--run-backups). 
 - If you do need more storage in the future, you can always add a drive and move to option 2. 
 
 ## Option 2: individual filesystems, drives pooled via MergerFS
@@ -81,7 +81,7 @@ BtrFS offers 3 ways to create a single fileystem across multiple devices, I only
 - As a best practice your precious personal data (documents, photos, videos, music albums) should be on seperate drives from your downloaded media/download drive. 
 
 ### About snapraid/snapraid-btrfs
-- Protection against disk failure [see backup subguide](https://github.com/zilexa/Homeserver/tree/master/maintenance) with dedicated parity disk(s) for scheduled parity, the disk will be less active than data disks, **extending its lifecycle** compared to the realtime duplication of Raid1.
+- Protection against disk failure [see backup subguide](https://github.com/gambleben/Homeserver/tree/master/maintenance) with dedicated parity disk(s) for scheduled parity, the disk will be less active than data disks, **extending its lifecycle** compared to the realtime duplication of Raid1.
 - **For benefits of SnapRAID versus RAID1:** [please read the first 5 SnapRAID FAQ](https://www.snapraid.it/faq#whatisit) and note by using _snapraid-btrfs_ we overcome the single major [disadvantage of snapraid itself](https://github.com/automorphism88/snapraid-btrfs#q-why-use-snapraid-btrfs) (versus BtrFS-Raid1). Because these tools exist, I really recommend no realtime duplication for home use. 
 - Note SnapRAID is only useful if you have more than 1 drive with data. 
 
@@ -100,4 +100,4 @@ We use this solution because it is extremely easy to understand, to setup and to
 
 &nbsp;
 
-Continue to the [Filesystems Guide](https://github.com/zilexa/Homeserver/tree/master/Filesystems-guide).
+Continue to the [Filesystems Guide](https://github.com/gambleben/Homeserver/tree/master/Filesystems-guide).

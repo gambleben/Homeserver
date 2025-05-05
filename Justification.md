@@ -1,13 +1,13 @@
 # A quiet, efficient, robust and future-proof home-server, optionally headless.
 
-### [What is it? And Why?](https://github.com/zilexa/Homeserver#what-is-it)
-### [Why self-build?](https://github.com/zilexa/Homeserver#why-self-build-just-buy-a-synology-or-qnap)
-### [What are the benefits of your setup files?](https://github.com/zilexa/Homeserver#what-are-the-benefits-of-adopting-your-setup-and-config-fully-or-partially)
-### [Can I use the server as PC or workstation?](https://github.com/zilexa/Homeserver#can-i-use-the-server-as-pc-or-workstation-but-i-have-never-used-ubuntu)
+### [What is it? And Why?](https://github.com/gambleben/Homeserver#what-is-it)
+### [Why self-build?](https://github.com/gambleben/Homeserver#why-self-build-just-buy-a-synology-or-qnap)
+### [What are the benefits of your setup files?](https://github.com/gambleben/Homeserver#what-are-the-benefits-of-adopting-your-setup-and-config-fully-or-partially)
+### [Can I use the server as PC or workstation?](https://github.com/gambleben/Homeserver#can-i-use-the-server-as-pc-or-workstation-but-i-have-never-used-ubuntu)
 
 ## What is it?
 An always-on PC like device that you can place near your router or even use as your Desktop/workstation. Giving you access to your data, providing you with a higher level of privacy and security and allowing you to be flexible with all online services you might use. 
-Also see the [Features](https://github.com/zilexa/Homeserver#features) you get by simply following this guide. 
+Also see the [Features](https://github.com/gambleben/Homeserver#features) you get by simply following this guide. 
 
 Why?
 1. Be in control of your own precious data, think archived family photos and videos but also new photos from your next vacation. 
@@ -38,5 +38,5 @@ Why?
  - Other guides only provide part of the equation. With my scripts, you can litteraly start from scratch. 
 
 ## Can I use the server as PC or workstation? But I have never used Ubuntu..
-You can, I do. Switched cold-turkey from Windows. You can find my [post-installation automated script for Manjaro OS](https://github.com/zilexa/manjaro-gnome-post-install) here, as it perfectly matches the prep-server.sh script that is central in this Guide. The post-install script is how I configure PCs for parents and friends, after running the script they are good to go, it even adds Macbook-like touchpad gestures. It also installs carefully selected common tools.
+You can, I do. Switched cold-turkey from Windows. You can find my [post-installation automated script for Manjaro OS](https://github.com/gambleben/manjaro-gnome-post-install) here, as it perfectly matches the prep-server.sh script that is central in this Guide. The post-install script is how I configure PCs for parents and friends, after running the script they are good to go, it even adds Macbook-like touchpad gestures. It also installs carefully selected common tools.
 

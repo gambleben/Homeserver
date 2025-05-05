@@ -5,7 +5,7 @@
   <a href="Justification.md">Why A Selfhosted Homeserver?</a> |
   <a href="https://www.docker.com/resources/what-container">Intro to microservices</a> |
   <a href="Recommendations.md">Hardware Recommendations</a> |
-  <a href="https://github.com/zilexa/Homeserver/blob/master/README.md#requirements">How To Get Started?</a>
+  <a href="https://github.com/gambleben/Homeserver/blob/master/README.md#requirements">How To Get Started?</a>
 </p>
 
 ***
@@ -34,7 +34,7 @@
 * Pretty dashboards to monitor your server _**Grafana, Prometheus**_ - Not necessary, but handy and with notifications. 
 * Your own homepage to quickly access each service in a single webpage _**Plugsy**_ [See preview here](https://github.com/plugsy/core). 
 
-For more details per service, [see here](https://github.com/zilexa/Homeserver/blob/master/services-apps-configuration.md). 
+For more details per service, [see here](https://github.com/gambleben/Homeserver/blob/master/services-apps-configuration.md). 
 
 ***
 
@@ -58,23 +58,23 @@ Step 0: get [the right hardware](Recommendations.md), most motherboards and CPUs
 
 ### Step 1 - Install Operating System & Essential Tools
 #### Step 1A -  How to install Manjaro? 
-How to prep a USB stick: see [Manjaro First Steps > Using a Live System](https://manjaro.org/support/firststeps/). Further Instructions [here](https://github.com/zilexa/manjaro-gnome-post-install#quick-guide).
+How to prep a USB stick: see [Manjaro First Steps > Using a Live System](https://manjaro.org/support/firststeps/). Further Instructions [here](https://github.com/gambleben/manjaro-gnome-post-install#quick-guide).
 
 _Note_
 * Requirement: select _BTRFS_ during setup with _no swap_, this allows you to later enable swapfile with hibernate support or zRAM.
 * Requirement: Do not select "automatically login..", if you do, you will be faced with key-ring issues when using docker. Solveable but not covered by this guide.
-* Consider using my [Manjaro Gnome Post-Install script](https://github.com/zilexa/manjaro-gnome-post-install). It is meant for both clients of your servers (laptops, PCs for you or your family) but also gives you a little headstart in this guide. You can always easily remove applications you do not need later, as the "App Store" of Manjaro is one of the best and fastest available in Linux world.
+* Consider using my [Manjaro Gnome Post-Install script](https://github.com/gambleben/manjaro-gnome-post-install). It is meant for both clients of your servers (laptops, PCs for you or your family) but also gives you a little headstart in this guide. You can always easily remove applications you do not need later, as the "App Store" of Manjaro is one of the best and fastest available in Linux world.
 
 #### Step 1B. How to properly install Docker and essential tools?
-_Turn your system into a modern server with 1 click with [prep_server.sh](https://github.com/zilexa/Homeserver/blob/master/prep-server.sh) to automatically or manually install essential tools, apply basic configuration + required stuff for optional docker services._
+_Turn your system into a modern server with 1 click with [prep_server.sh](https://github.com/gambleben/Homeserver/blob/master/prep-server.sh) to automatically or manually install essential tools, apply basic configuration + required stuff for optional docker services._
 
-It is recommended to read through the [prep_server.sh](https://github.com/zilexa/Homeserver/blob/master/prep-server.sh) to get an idea what it does and why. 
+It is recommended to read through the [prep_server.sh](https://github.com/gambleben/Homeserver/blob/master/prep-server.sh) to get an idea what it does and why. 
 It has been carefully created to install the tools required to run all aspects of your server (from docker to mainentance tasks). \
 Official documentation is used to install tools correctly and all tools will be installed using the offical Manjaro package manager, a single package manager that keeps applications, OS and drivers up to date. 
 
 Download and install it via: 
 ```
-cd Downloads && wget https://raw.githubusercontent.com/zilexa/Homeserver/master/prep-server.sh
+cd Downloads && wget https://raw.githubusercontent.com/gambleben/Homeserver/master/prep-server.sh
 bash prep-server.sh
 ```
 _Note_
@@ -88,23 +88,23 @@ _Note_
 
 ### Step 2 - Filesystems and Folderstructure
 This is the most time-consuming and complex part of creating your homeserver as there are many choices to be made, not just for your filesystem but also folderstructure. 
-1. Check the [Filesystem Options](https://github.com/zilexa/Homeserver/tree/master/Filesystems-guide/Filesystems-options.md). Decide what is best for you. 
-2. Follow the [Filesystems Guide](https://github.com/zilexa/Homeserver/tree/master/Filesystems-guide)
+1. Check the [Filesystem Options](https://github.com/gambleben/Homeserver/tree/master/Filesystems-guide/Filesystems-options.md). Decide what is best for you. 
+2. Follow the [Filesystems Guide](https://github.com/gambleben/Homeserver/tree/master/Filesystems-guide)
 
 ***
 
 ### Step 3. Data Migration
-[Data Migration](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Data-Migration.md) - Move files to your server data pool.
+[Data Migration](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Data-Migration.md) - Move files to your server data pool.
 
 ***
 
 ### Step 4 - Network configuration
-Before you can access your services outside of your home, [prepare your network](https://github.com/zilexa/Homeserver/blob/master/network-configuration.md) and get your own domain. 
+Before you can access your services outside of your home, [prepare your network](https://github.com/gambleben/Homeserver/blob/master/network-configuration.md) and get your own domain. 
 
 ***
 
 ### Step 5 - Docker Compose Guide - customisation and personalisation
-[Docker Compose Guide](https://github.com/zilexa/Homeserver/tree/master/docker)
+[Docker Compose Guide](https://github.com/gambleben/Homeserver/tree/master/docker)
 There are a lot of guides and docker-compose.yml files. Most of them are not complete or do not adhere to Docker best practices. A lot of hours have been spent on the yml file in this repository to ensure it follows best practices, does not contain unneccessary complexities and is as generic as possible, so that it can be published without security concerns. The .env file allows you to personalize your compose file through variables. 
 
 _Note:_ 
@@ -115,14 +115,14 @@ _Note:_
 ### Step 6 - Configure your apps & services
 The Docker guide (step 3) explains how to access your services. Configuring & using your services is not covered by this guide. 
 The overview of Docker applications below will contain some foldable sections with hints. 
-[Configure Apps & Services](https://github.com/zilexa/Homeserver/blob/master/services-apps-configuration.md) contains direct links to the documentation or homepage of each Docker app. 
+[Configure Apps & Services](https://github.com/gambleben/Homeserver/blob/master/services-apps-configuration.md) contains direct links to the documentation or homepage of each Docker app. 
 
 ***
 
 ### Step 7 - Configure & run Backups
-Critical to enjoy the benefits of hosting your own server is the reliability of data storage and the ability to quickly recover a system (simply using your docker folder containing the folders you mount into containers). Follow the [Backup Guide](https://github.com/zilexa/Homeserver/tree/master/Backups-guide).
+Critical to enjoy the benefits of hosting your own server is the reliability of data storage and the ability to quickly recover a system (simply using your docker folder containing the folders you mount into containers). Follow the [Backup Guide](https://github.com/gambleben/Homeserver/tree/master/Backups-guide).
 
 ***
 
 ### Step 8 - Automatic Maintenance and optional manual maintenance
-To keep your server purring quietly, without having to spend much or any time keeping it running, follow the [Maintenance Guide](https://github.com/zilexa/Homeserver/tree/master/Maintenance-guide) for regular cleanup, updates of server and docker images and filesystem/drive maintenance. 
+To keep your server purring quietly, without having to spend much or any time keeping it running, follow the [Maintenance Guide](https://github.com/gambleben/Homeserver/tree/master/Maintenance-guide) for regular cleanup, updates of server and docker images and filesystem/drive maintenance. 

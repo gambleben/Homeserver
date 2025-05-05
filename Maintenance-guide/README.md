@@ -4,9 +4,9 @@ To keep your server spinning and purring everyday like its very first day, sever
 Below the tasks are explained. Note the order of execution has been chosen carefully. If you remove/add tasks, keep that in mind. Also note, depending on your setup and hardware, *all the tasks in Nightly.sh are optional.*
 
 The prep-server.sh script has downloaded the tools and scripts to `$HOME/docker/HOST/`. Most importantly: 
-- Automatic backups every morning: This is already covered in the [BTRFS subvolume Backups Guide](https://github.com/zilexa/Homeserver/tree/master/backup-strategy#ii-configure-subvolume-backups-via-btrbk)
-- Automatic Maintenance every last Sunday of the month: [/docker/HOST/monthly.sh](https://github.com/zilexa/Homeserver/blob/master/docker/HOST/monthly.sh)
-- Optional nightly tasks: [/docker/HOST/nightly.sh](https://github.com/zilexa/Homeserver/blob/master/docker/HOST/nightly.sh)
+- Automatic backups every morning: This is already covered in the [BTRFS subvolume Backups Guide](https://github.com/gambleben/Homeserver/tree/master/backup-strategy#ii-configure-subvolume-backups-via-btrbk)
+- Automatic Maintenance every last Sunday of the month: [/docker/HOST/monthly.sh](https://github.com/gambleben/Homeserver/blob/master/docker/HOST/monthly.sh)
+- Optional nightly tasks: [/docker/HOST/nightly.sh](https://github.com/gambleben/Homeserver/blob/master/docker/HOST/nightly.sh)
 
 ***
 ### The Monthly Maintenance Email
@@ -23,11 +23,11 @@ This means absolute minimum amount of manual maintenance required!
 
 ### STEP 1: CONFIGURE & TEST Monthly
 1. Ensure all your drives are listed under BTRFS filesystem maintenance. The correct paths to subvolumes and device names. 
-2. Assuming you have entered your SMTP details during [Step 1B prep-server.sh](https://github.com/zilexa/Homeserver#step-1b-how-to-properly-install-docker-and-essential-tools) otherwise do so first in `/etc/msmtprc` and replace `$DEFAULTEMAIL` with your email in `/etc/aliases`:  \
+2. Assuming you have entered your SMTP details during [Step 1B prep-server.sh](https://github.com/gambleben/Homeserver#step-1b-how-to-properly-install-docker-and-essential-tools) otherwise do so first in `/etc/msmtprc` and replace `$DEFAULTEMAIL` with your email in `/etc/aliases`:  \
 Run `sudo bash $HOME/docker/HOST/monthly.sh`. All tasks should be performed and you should receive an email.
 
 ### STEP 2: SCHEDULE Monthly
-You already scheduled the backups in [BTRFS subvolume Backups Guide](https://github.com/zilexa/Homeserver/tree/master/backup-strategy#ii-configure-subvolume-backups-via-btrbk). Now all you have to do is add a line for monthly, using `run-if-today` to only run the Last Sunday of the month: 
+You already scheduled the backups in [BTRFS subvolume Backups Guide](https://github.com/gambleben/Homeserver/tree/master/backup-strategy#ii-configure-subvolume-backups-via-btrbk). Now all you have to do is add a line for monthly, using `run-if-today` to only run the Last Sunday of the month: 
 ```
 sudo crontab -e
 ```
@@ -40,7 +40,7 @@ Copy & paste the below, For run-if-today to know what weekday you want to run it
 ```
 Hit CTRL+S to save and CTRL+X to exit.
 
-This is your full and final cron, including the line for [backups](https://github.com/zilexa/Homeserver/tree/master/backup-strategy#ii-configure-subvolume-backups-via-btrbk) and for FileRun notifications see [(FileRun "Required Configuration")](https://github.com/zilexa/Homeserver/blob/master/services-apps-configuration.md#files-cloud-via-filerun---documentation-and-support_).  \
+This is your full and final cron, including the line for [backups](https://github.com/gambleben/Homeserver/tree/master/backup-strategy#ii-configure-subvolume-backups-via-btrbk) and for FileRun notifications see [(FileRun "Required Configuration")](https://github.com/gambleben/Homeserver/blob/master/services-apps-configuration.md#files-cloud-via-filerun---documentation-and-support_).  \
 This cron means:
 - Backups run 5.30 AM every day. Monthly runs every first Sunday of the month at 5.50AM. FileRun notifications are sent every 5min.
 - The Monthly will check if `btrbk` or `Nightly` are still running. if so, it will pause until they are finished.

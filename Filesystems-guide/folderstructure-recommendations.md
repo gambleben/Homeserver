@@ -1,10 +1,10 @@
 # Folder Structure Recommendations & Data Migration
 
 **Contents**
-1. [Overview of system folders](https://github.com/zilexa/Homeserver/tree/master/filesystem/folderstructure#1-overview-of-system-folders)
-2. [Overview of mountpoints](https://github.com/zilexa/Homeserver/tree/master/filesystem/folderstructure#2-overview-mountpoints)
-3. [A folder structure for your data](https://github.com/zilexa/Homeserver/tree/master/filesystem/folderstructure#3-a-folder-structure-of-your-data)
-4. [How to handle shared files between users](https://github.com/zilexa/Homeserver/tree/master/filesystem/folderstructure#5-sharing-between-partners-and-devices)
+1. [Overview of system folders](https://github.com/gambleben/Homeserver/tree/master/filesystem/folderstructure#1-overview-of-system-folders)
+2. [Overview of mountpoints](https://github.com/gambleben/Homeserver/tree/master/filesystem/folderstructure#2-overview-mountpoints)
+3. [A folder structure for your data](https://github.com/gambleben/Homeserver/tree/master/filesystem/folderstructure#3-a-folder-structure-of-your-data)
+4. [How to handle shared files between users](https://github.com/gambleben/Homeserver/tree/master/filesystem/folderstructure#5-sharing-between-partners-and-devices)
 
 
 ## Folder Structure Recommendations
@@ -21,7 +21,7 @@ Run this command and look at the `system` folder. You should see:
   - `@cache`, mapped to path `/` = to exclude it from snapshots of the system (= snapshot of `@`)
   - `@log` mapped to path `/var/log` = to exclude it from snapshots of the system (= snapshot of `@`)
   - `@home` mapped to path`/home` = OS user account folder, will be snapshotted and backupped.
-- Recommended subvolumes, created by the (post-install script)[https://github.com/zilexa/manjaro-gnome-post-install]: 
+- Recommended subvolumes, created by the (post-install script)[https://github.com/gambleben/manjaro-gnome-post-install]: 
   - `@usercache` mapped to `$HOME/.cache` = to exclude it from snapshots of @home. Contains temp files only like browser cache, not browserhistory. 
   - `@downloads` mapped to `$HOME/Downloads = to exclude it from snapshots of @home.
 - Subvolumes created by prep-server script: 
@@ -81,7 +81,7 @@ If you use MergerFS, do the above for each drive that contains your Media/incomi
 
 ## 4. Sharing between partners and devices
 #### 4.1 Sharing data locally
-[How-To NFSv4.2](https://github.com/zilexa/Homeserver/tree/master/filesystem/networkshares_HowTo-NFSv4.2) is the fastest network protocol, allows server-side copy just like more common smb/samba and works on all OS's, although only for free on Mac and Linux. 
+[How-To NFSv4.2](https://github.com/gambleben/Homeserver/tree/master/filesystem/networkshares_HowTo-NFSv4.2) is the fastest network protocol, allows server-side copy just like more common smb/samba and works on all OS's, although only for free on Mac and Linux. 
 I only use this to share folders that are too large to actually sync with my laptop. For example photo albums. To sync files to laptops/PCs, Syncthing is the recommended application (installed via docker). 
 
 
@@ -94,7 +94,7 @@ To ensure the local filesystem AND the online filecloud always allows direct acc
 
 #### Solution
 To keep the filesystem structure simple, we create a 3rd user called `Shared`. OPTION 1: 
-If you used my [post-install](https://github.com/zilexa/manjaro-gnome-post-install) script, the folders _Desktop, Documents, Pictures, Media_ are already in a seperate subvolume in `/mnt/users/systemusername`. 
+If you used my [post-install](https://github.com/gambleben/manjaro-gnome-post-install) script, the folders _Desktop, Documents, Pictures, Media_ are already in a seperate subvolume in `/mnt/users/systemusername`. 
 - This could simply become the folder of your `Shared` user, just migrate that folder to your `/mnt/pool/users/`. 
 - Then update the symlinks to `$HOME` using `ln -nfs /mnt/pool/users/Shared/Desktop $HOME/Desktop` and do that for _Documents, Pictures_ as well.  
 
@@ -109,7 +109,7 @@ OPTION 2:
 The script prep-folderstructure.sh should not be used blindly. Or not at all. Only for inspiration. It will create the folder structure as described AND map those `Shared` documents and media folders to the server /home dir, replacing those personal folders for symlinks. Adjust at will before running it.
 1. Get the script: 
 `cd Downloads`
-`wget https://raw.githubusercontent.com/zilexa/Homeserver/master/docker/create_folderstructure.sh`
+`wget https://raw.githubusercontent.com/gambleben/Homeserver/master/docker/create_folderstructure.sh`
 2. Before you run it, open it open the script in a text editor
    - Use the top commands and fix the permissions, change `asterix` to your user account.
    - Also make changes/remove parts you do not want.

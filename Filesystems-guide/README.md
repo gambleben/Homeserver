@@ -1,10 +1,10 @@
 # Step 2: Filesystems & Folderstructure
 
-# Recommended read: [Filesystem Options](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md)
+# Recommended read: [Filesystem Options](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md)
 _3 options for filesystems are explained, choose which one is best for you before continuing with step 2.2 below._
 
 ## Requirements: 
-1. The OS disk should be BtrFS, this should be chosen during [OS Installation](https://github.com/zilexa/manjaro-gnome-post-install). 
+1. The OS disk should be BtrFS, this should be chosen during [OS Installation](https://github.com/gambleben/manjaro-gnome-post-install). 
 2. You have ran the prep-docker.sh script and the server tools have been installed. 
 3. You have read the synopsis, had a good night rest and are ready to decide which of the 3 options is best for you!
 
@@ -16,12 +16,12 @@ _3 options for filesystems are explained, choose which one is best for you befor
 - To actually use drives, they need to be mounted to a folder you have created, *you cannot use the device path `/dev/`*. 
 - USB connected drives are automatically mounted to `/media/...`, especially USB drives. To permanently mount your drives, we will use `/mnt/` instead. 
 - The system file `/etc/fstab` is a register of all your mounts, this file is used at boot to determine which partitions to mount, and where to mount them.
-  - You can edit this file easily, [example here](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/fstab-example). Follow it!
+  - You can edit this file easily, [example here](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/fstab-example). Follow it!
   - `/etc/stab` should not contain `/dev/` paths, instead the partition/filesystem UUID is used. This ID is persistent unless you remove its filesystem.
   - If you make typos or mistakes in `/etc/fstab`, you mess up your systems ability to boot. The system will boot to terminal and you can then easily edit fstab and reboot, using `sudo nano /etc/fstab`. Alternatively, you can simply restore fstab from the backup (created during step 4): `sudo mv /etc/fstabbackup /etc/fstab` and reboot again.
 
 ### How to get an overview of your drives?
-- For an overview of your drives, open the Gnome Disks Utility (part of the App Menu top left if you used [post-install](https://github.com/zilexa/manjaro-gnome-post-install)).
+- For an overview of your drives, open the Gnome Disks Utility (part of the App Menu top left if you used [post-install](https://github.com/gambleben/manjaro-gnome-post-install)).
 - Run `sudo lsblk -f` - Shows drives, partitions and filesystems in a nice tree-view. Recommended. 
 - Run `sudo fdisk -l` - lists physical drives and their partitions. Recommended especially for drives without filesystems. 
 - Run `blkid` shows all UUIDs note usually you are only interested in the first UUID of each.
@@ -71,7 +71,7 @@ Note each drive now has a partition (sda has sda1, etc): `sudo lsblk -f` and see
 Make sure you have the correct device path for each drive when you use this command!
 Your OS drive should be on an NVME drive (`/dev/nvmen0p1`), easy to identify and keep out of scope. 
 1. Decide the purpose of each of your drives! Highly recommended to have separate drives for *Media* and for *Users*.  \
-Easiest would be a single drive for each [(Filesystem Option 1)](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-1-all-your-data-easily-fits-on-a-single-disk) Alternatively a single filesystem for each where the filesystems span across multiple drives [(Filesystem Option 3)](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-3-use-btrfs-data-duplication) or multiple drives, each their own filesystem, pooled together with MergerFS mountpoints: one MergerFS mountpoint for *Media* and one for *Users* [(Filesystem Option 2)](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-2-individual-filesystems-drives-pooled-via-mergerfs). 
+Easiest would be a single drive for each [(Filesystem Option 1)](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-1-all-your-data-easily-fits-on-a-single-disk) Alternatively a single filesystem for each where the filesystems span across multiple drives [(Filesystem Option 3)](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-3-use-btrfs-data-duplication) or multiple drives, each their own filesystem, pooled together with MergerFS mountpoints: one MergerFS mountpoint for *Media* and one for *Users* [(Filesystem Option 2)](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-2-individual-filesystems-drives-pooled-via-mergerfs). 
 2. The following drive labels make sense:
   - `users` for the filesystem containing users personal data.
   - `media` for the filesystem containing media downloads.
@@ -80,16 +80,16 @@ Easiest would be a single drive for each [(Filesystem Option 1)](https://github.
   - Optional: `parity1, parity2`drive for parity, only when using SnapRAID (read the Filesystem Synopsis). 
   - Optional: `cache`: only when using MergerFS Tiered Caching. 
 3. Create the filesystems for each drive: 
-- For a single filesystem per drive (backup drives and [Option 1: single drive BTRFS filesystem](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-1-all-your-data-easily-fits-on-a-single-disk)): Create individual filesystems per drive using the correct label per device (you choose):  \
+- For a single filesystem per drive (backup drives and [Option 1: single drive BTRFS filesystem](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-1-all-your-data-easily-fits-on-a-single-disk)): Create individual filesystems per drive using the correct label per device (you choose):  \
     ```sudo mkfs.btrfs -m dup -L users /dev/sda1```  \
     ```sudo mkfs.btrfs -m dup -L media /dev/sdb1```  \
     ```sudo mkfs.btrfs -m dup -L backup1 /dev/sdc1```  
 
-- For a filesystem spanning multiple drives [(Option 3: multiple drives BTRFS filesystem (btrfs-raid1))](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-3-use-btrfs-data-duplication) for Users and a filesystem spanning multiple drives for Media, each with 2 drives:  \
+- For a filesystem spanning multiple drives [(Option 3: multiple drives BTRFS filesystem (btrfs-raid1))](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-3-use-btrfs-data-duplication) for Users and a filesystem spanning multiple drives for Media, each with 2 drives:  \
     ```sudo mkfs.btrfs -L users -d raid1 /dev/sda1 /dev/sdb1```  \
     ```sudo mkfs.btrfs -L media -d raid1 /dev/sdc1 /dev/sdd1```  
     
-- for [Option 2: MergerFS](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-1-all-your-data-easily-fits-on-a-single-disk) simply create the single filesystem per drive, but use labels like "data0", "data1", "data2" etc instead of "users" or "media", because the drives will be pooled via MergerFS.  
+- for [Option 2: MergerFS](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md#option-1-all-your-data-easily-fits-on-a-single-disk) simply create the single filesystem per drive, but use labels like "data0", "data1", "data2" etc instead of "users" or "media", because the drives will be pooled via MergerFS.  
 
 Optional: create filesystem for your SnapRAID drive (should be EXT4 with these options):     ```sudo mkfs.ext4 -L parity1  -m 0 -i 67108864 -J size=4 /dev/sda```
 
@@ -99,8 +99,8 @@ Now that each drive has a filesystem (or in case of BTRFS RAID1: is part of a fi
 1. Open the folder `/mnt` in your file manager, right click and *open with root*.
 2. Create the mountpoints for your drives, at least 3 mountpoints: 
   - 1 for each backup drive: `/mnt/drives/backup1`
-  - 1 for the Users datapool: `/mnt/pool/Users` for your ***filesystem*** used for storing users personal data (could be 1 drive or multiple using either btrfs-raid1 or MergerFS, see [Filesystem Options](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md). 
-  - 1 for the Media datapool: `/mnt/pool/Media`, for your ***filesystem*** used for storing downloaded media (could be 1 drive or multiple using either btrfs-raid1 or MergerFS, see [Filesystem Options](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md). 
+  - 1 for the Users datapool: `/mnt/pool/Users` for your ***filesystem*** used for storing users personal data (could be 1 drive or multiple using either btrfs-raid1 or MergerFS, see [Filesystem Options](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md). 
+  - 1 for the Media datapool: `/mnt/pool/Media`, for your ***filesystem*** used for storing downloaded media (could be 1 drive or multiple using either btrfs-raid1 or MergerFS, see [Filesystem Options](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/Filesystems-options.md). 
   - Only if you use MergerFS: 
     - `mnt/drives/data0`, `/mnt/drives/data1`, `/mnt/drives/data2` etc.
       - Only if you will use MergerFS with a cache drive: `/mnt/drives/cache` and `/mnt/pool-nocache` this way you can easily offload the cache (`/mnt/drives/cache`) to this mountpoint, which will be a MergerFS mount without the cache drive.  
@@ -115,11 +115,11 @@ This step is prone to errors. Prepare first.
 3. Create a backup of fstab: `sudo cp /etc/fstab /etc/fstabbackup`
 4. Run `sudo lsblk -f` for an overview, also have Disk Utility open next to it. 
 5. Now open your fstab in the nice graphical texteditor Pluma, with elevated rights to be able to edit: `sudo dbus-launch pluma /etc/fstab`
-6. Open [the example fstab](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/fstab-example), *note all UUIDs are missing in this example. Use the partition UUIDs you see in terminal/disk utility*. 
+6. Open [the example fstab](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/fstab-example), *note all UUIDs are missing in this example. Use the partition UUIDs you see in terminal/disk utility*. 
 
 ### _Steps to add drives_ 
 1. Go through the example, add the lines you are missing under "AUTO-MOUNTED AT BOOT". 
-    - Note if you used [Post-Install](https://github.com/zilexa/manjaro-gnome-post-install) it has created subvolumes, mountpoints for `Downloads` and `.cache` because they should always be excluded from backup snapshots created by the OS. 
+    - Note if you used [Post-Install](https://github.com/gambleben/manjaro-gnome-post-install) it has created subvolumes, mountpoints for `Downloads` and `.cache` because they should always be excluded from backup snapshots created by the OS. 
     - Note prep-server.sh has created a not-automatically-mounted line to mount the entire system drive. Required for backups and when you want to create/modify subvolumes on the systemdrive.
 3. Make sure you add the lines under "NOT AUTOMATICALLY MOUNTED" for the system drive and the backup drives you might have.
 4. If you use BTRFS-RAID1, you simply use the UUID of the first drive in that pool. So you only need 1 line here, for each BTRFS-RAID pool. 
@@ -137,7 +137,7 @@ If a drive stops working, you turn off your system and remove that drive. How wi
 &nbsp;
 
 ## Step 2.5 Create subvolumes
-Optionally read [Folderstructure Recommendations](https://github.com/zilexa/Homeserver/blob/master/Filesystems-guide/folderstructure-recommendations.md).  \
+Optionally read [Folderstructure Recommendations](https://github.com/gambleben/Homeserver/blob/master/Filesystems-guide/folderstructure-recommendations.md).  \
 **Users**: Each user should have its own subvolume. Consider this subvolume to be each users virtual drive. Users will be individually snapshotted and backupped, allowing you to easily restore individual users storage when needed. You could even simply mount their snapshot into this folder to give them access to their timeline backups. 
 **Media**: Create a subvolume for Shows, Movies, Music and incoming. This gives you flexibility in the future when you need to move these folders to other drives. Remember, btrfs send/receive is the fastest way to copy/move folders, since it will happen on a filesystem-level, with a metadata (checksum) aware filesystem. Alternatives like rsync need to calculate checksums for each file, slowing down the process greatly. 
 
@@ -193,7 +193,7 @@ Notes:
 - ` $HOME/Downloads` should be considered a temporary folder, no need to have it in your pool. Make sure this folder is a subvolume.
 ***
 
-Congratulations! Your filestems/drives are now individually accessible and you have a basic folderstructure. time to use your data storage pools! Go to [Step 3. Data Migration](https://github.com/zilexa/Homeserver/blob/master/filesystem/data-migration.md) to learn how to properly copy your data, verify copies are bit-for-bit perfect and fix ownership and permissions.
+Congratulations! Your filestems/drives are now individually accessible and you have a basic folderstructure. time to use your data storage pools! Go to [Step 3. Data Migration](https://github.com/gambleben/Homeserver/blob/master/filesystem/data-migration.md) to learn how to properly copy your data, verify copies are bit-for-bit perfect and fix ownership and permissions.
 
 ***
 

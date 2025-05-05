@@ -6,14 +6,14 @@ If you have an understanding of Docker containerization and docker-compose to se
   - You can remove them completely, move your persistent volumes ($HOME/docker/...) to a different computer/laptop, run docker-compose and be back online in minutes with your own configuration (= your persistent volumes. That is how easy it will be to restore your server or re-create an application when there is an issue!
 - _This makes Docker the most simple, easy and fast way to deploy applications and maintain them._
   - Updating = pull new image & re-create container. 
-- _**Check the homepage for [the overview of docker applications](https://github.com/zilexa/Homeserver/blob/master/README.md#overview-of-applications-and-services) included in the compose file.**_
+- _**Check the homepage for [the overview of docker applications](https://github.com/gambleben/Homeserver/blob/master/README.md#overview-of-applications-and-services) included in the compose file.**_
 
 ***
 
 **Contents**
-- [Step 1: Customisation and Personalisation](https://github.com/zilexa/Homeserver/blob/master/docker/README.md#step-1---customisation-and-personalisation-of-compose-file)
-- [Step 2: Run Docker Compose](https://github.com/zilexa/Homeserver/blob/master/docker/README.md#step-2----run-docker-compose)
-- [Common docker management tasks](https://github.com/zilexa/Homeserver/blob/master/docker/README.md#common-docker-management-tasks)
+- [Step 1: Customisation and Personalisation](https://github.com/gambleben/Homeserver/blob/master/docker/README.md#step-1---customisation-and-personalisation-of-compose-file)
+- [Step 2: Run Docker Compose](https://github.com/gambleben/Homeserver/blob/master/docker/README.md#step-2----run-docker-compose)
+- [Common docker management tasks](https://github.com/gambleben/Homeserver/blob/master/docker/README.md#common-docker-management-tasks)
 
 Notice the script has placed 2 files in $HOME/docker: `docker-compose.yml` and (hidden) `.env`. 
 Notice this folder and its contents are read-only, you need elevated root rights to edit the files. 
@@ -24,8 +24,8 @@ Modify docker-compose.yml to your needs and understand the (mostly unique for yo
 ### Step 1 - Customisation and Personalisation of Compose file
 1. Decide which services you want to run and remove others from this file. Note at the bottom you should remove the corresponding networks as well. 
 2. if you remove certain applications, at the bottom also remove unneccary networks.
-3. If you have not registered your own domain (see [Network Configuration](https://github.com/zilexa/Homeserver/blob/master/network-configuration.md), comment out services that are exposed through the internet. 
-4. If your datapool is not configured/mounted (see [Step 2: Filesystem Configuration](https://github.com/zilexa/Homeserver/tree/master/filesystem)) comment out services that have a mount to the datapool.. 
+3. If you have not registered your own domain (see [Network Configuration](https://github.com/gambleben/Homeserver/blob/master/network-configuration.md), comment out services that are exposed through the internet. 
+4. If your datapool is not configured/mounted (see [Step 2: Filesystem Configuration](https://github.com/gambleben/Homeserver/tree/master/filesystem)) comment out services that have a mount to the datapool.. 
 
 5. _Personalisation_ is mostly done through the .env file. Go through it and adjust. Every variable in the compose file (like your domain name, the root path of your datapool, mail credentials) is stored here. 
 6. docker-compose.yml: Change the subdomains (for example: `files.$DOMAIN`) of exposed services and the local domains (like http://g.o or http://sonarr.o) to your liking.
@@ -34,7 +34,7 @@ Modify docker-compose.yml to your needs and understand the (mostly unique for yo
 ***
 
 ### Step 2 -  Run Docker Compose
-Make sure you commented out or removed services that are exposed via a $DOMAIN name or services that need access to you datapool, unless you completed [Step 2: Filesystem Configuration](https://github.com/zilexa/Homeserver/tree/master/filesystem) and [Step 3: Network Configuration](https://github.com/zilexa/Homeserver/blob/master/network-configuration.md). 
+Make sure you commented out or removed services that are exposed via a $DOMAIN name or services that need access to you datapool, unless you completed [Step 2: Filesystem Configuration](https://github.com/gambleben/Homeserver/tree/master/filesystem) and [Step 3: Network Configuration](https://github.com/gambleben/Homeserver/blob/master/network-configuration.md). 
 
 1. `cd docker` (when you open terminal, you should already be in $HOME).
 2. First, check for errors:  \
